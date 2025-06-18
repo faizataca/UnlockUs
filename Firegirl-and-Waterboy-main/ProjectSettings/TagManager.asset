@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Water
+  - Fire
+  - Player1
+  - Player2
+  - FireDoor
+  - WaterDoor
+  - Coin
+  - Gems
+  - Blue Portal
+  - Orange Portal
+  - HorizontalWall
+  - VerticalWall
+  - OrangeShot
+  - BlueShot
+  - Acid
+  - Box
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Ground
+  - Water
+  - UI
+  - Player 1
+  - Player 2
+  - Switch Trigger
+  - Game UI
+  - Background
+  - Box
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 2023479083
+    locked: 0
+  - name: Background Foreground
+    uniqueID: 1908832745
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Switch Trigger
+    uniqueID: 886310659
+    locked: 0
+  - name: Switch Base
+    uniqueID: 3658711493
+    locked: 0
+  - name: Obstacles
+    uniqueID: 1978062201
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  - Light Layer 1
+  - Light Layer 2
+  - Light Layer 3
+  - Light Layer 4
+  - Light Layer 5
+  - Light Layer 6
+  - Light Layer 7
