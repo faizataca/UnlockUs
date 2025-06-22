@@ -2766,6 +2766,12 @@ MonoBehaviour:
     pitch: 1.2
     loop: 0
     source: {fileID: 0}
+  - name: Collected Key
+    clip: {fileID: 8300000, guid: 9df0fbe4243165b4c84b8b5c927e5eb6, type: 3}
+    volume: 0.8
+    pitch: 1.2
+    loop: 0
+    source: {fileID: 0}
   musicTracks:
   - name: Menu Theme
     clip: {fileID: 8300000, guid: 41e627e56bbf7de4a81296be3162226f, type: 3}
