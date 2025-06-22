@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     {
         CalculateFinalScore();
         CalculateStars();
-        coinsCollectedLevelComplete.text = coins + "/6";
+        coinsCollectedLevelComplete.text = coins + "/9";
         scoreLevelComplete.text = score + "";
 
         PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].AddNewScore(score, timer.GetTime(), coins, starsValue);
@@ -48,12 +48,12 @@ public class ScoreManager : MonoBehaviour
             stars.text = "☆☆☆";
             starsValue = 0;
         }
-        else if (score <= 22500)
+        else if (score <= 40000)
         {
             stars.text = "★☆☆";
             starsValue = 1;
         }
-        else if (score > 22000 && score <= 60000)
+        else if (score > 40000 && score <= 60000)
         {
             stars.text = "★★☆";
             starsValue = 2;
