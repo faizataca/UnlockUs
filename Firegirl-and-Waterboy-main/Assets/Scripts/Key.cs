@@ -6,8 +6,18 @@ public class Key : MonoBehaviour
     {
         if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
-            FindObjectOfType<ScoreManager>().CollectKey();
-            Destroy(gameObject); // Hapus kunci dari scene
+            // Cari ScoreManager (bisa pilih FindFirstObjectByType atau FindAnyObjectByType)
+            ScoreManager scoreManager = FindFirstObjectByType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.CollectKey();
+            }
+
+            // Mainkan suara
+            AudioManager.Instance.PlaySFX("Collected Key");
+
+            // Hapus kunci dari scene
+            Destroy(gameObject);
         }
     }
 }
