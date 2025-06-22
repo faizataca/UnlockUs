@@ -12,7 +12,7 @@ public class CompleteLevel : MonoBehaviour
     [SerializeField] PlayerMovement player1;
     [SerializeField] PlayerMovement player2;
 
-    //Score manager called upon level completion
+    // Score manager called upon level completion
     [SerializeField] ScoreManager scoreManager;
 
     public GameObject completeLevelMenu;
@@ -28,16 +28,21 @@ public class CompleteLevel : MonoBehaviour
         CompleteLevelCheck();
     }
 
-    // Checks if both players are at their exits.
+    // Checks if both players are at their exits and if the key has been collected
     private void CompleteLevelCheck()
     { 
         atWaterDoor = waterBool.IsAtDoor();
         atFireDoor = fireBool.IsAtDoor();
-    
-        if(atFireDoor && atWaterDoor && !active && BothPlayersAreGrounded())
+
+        // Tambahkan syarat harus sudah ambil kunci
+        if(atFireDoor && atWaterDoor && !active && BothPlayersAreGrounded() && scoreManager.HasKey())
         {
             active = true;
             Win();
+        }
+        else if (atFireDoor && atWaterDoor && !scoreManager.HasKey())
+        {
+            Debug.Log("You need to collect the key first!");
         }
     }
 
