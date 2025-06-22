@@ -3,14 +3,14 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    //Live coin count
+    // Live coin count
     private int coins = 0;
 
     private int customTime = 0; // Added for testing purposes
 
     [SerializeField] public TextMeshProUGUI coinsCollected;
 
-    //Fields displayed upon level completion
+    // Fields displayed upon level completion
     [SerializeField] public TextMeshProUGUI coinsCollectedLevelComplete;
     [SerializeField] public TextMeshProUGUI scoreLevelComplete;
 
@@ -20,12 +20,25 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] public Timer timer;
     private int score = 0;
 
-    //Level complete
+    // Key management
+    private bool hasKey = false;
+
+    public void CollectKey()
+    {
+        hasKey = true;
+    }
+
+    public bool HasKey()
+    {
+        return hasKey;
+    }
+
+    // Level complete
     public void LevelComplete()
     {
         CalculateFinalScore();
         CalculateStars();
-        coinsCollectedLevelComplete.text = coins + "/9";
+        coinsCollectedLevelComplete.text = coins + "/16";
         scoreLevelComplete.text = score + "";
 
         PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].AddNewScore(score, timer.GetTime(), coins, starsValue);
@@ -33,14 +46,14 @@ public class ScoreManager : MonoBehaviour
         PlayFabManager.Instance.SavePlayer();
     }
 
-    //Update coins collected
+    // Update coins collected
     public void UpdateScore()
     {
         coins += 1;
         coinsCollected.text = "Coins: " + coins;
     }
 
-    //Calculate the number of stars to display based on score
+    // Calculate the number of stars to display based on score
     private void CalculateStars()
     {
         if (score < 10000)
@@ -48,12 +61,12 @@ public class ScoreManager : MonoBehaviour
             stars.text = "☆☆☆";
             starsValue = 0;
         }
-        else if (score <= 40000)
+        else if (score <= 60000)
         {
             stars.text = "★☆☆";
             starsValue = 1;
         }
-        else if (score > 40000 && score <= 60000)
+        else if (score > 60000 && score <= 140000)
         {
             stars.text = "★★☆";
             starsValue = 2;
@@ -65,22 +78,20 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    //Calculate score on level complete
+    // Calculate score on level complete
     public void CalculateFinalScore()
     {
-        score = 0;
-        // Calculate final score based on coins collected and time taken
-        score = coins * 10000 + (5000 - GetTime()); 
+        score = coins * 10000 + (5000 - GetTime());
     }
 
-    //Get and set methods for coins
+    // Get and set methods for coins
     public int Coins
     {
         get { return coins; }
         set { coins = value; }
     }
 
-    //Get and set methods for score
+    // Get and set methods for score
     public int Score
     {
         get { return score; }
