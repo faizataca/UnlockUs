@@ -1,26 +1,27 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Live coin count
     private int coins = 0;
-
-    private int customTime = 0; // Added for testing purposes
+    private int customTime = 0;
 
     [SerializeField] public TextMeshProUGUI coinsCollected;
-
-    // Fields displayed upon level completion
     [SerializeField] public TextMeshProUGUI coinsCollectedLevelComplete;
     [SerializeField] public TextMeshProUGUI scoreLevelComplete;
 
-    [SerializeField] public TextMeshProUGUI stars;
+    [Header("Stars")]
+    [SerializeField] private Image star1;
+    [SerializeField] private Image star2;
+    [SerializeField] private Image star3;
+    [SerializeField] private Sprite starFilled;
+    [SerializeField] private Sprite starEmpty;
     private int starsValue;
 
     [SerializeField] public Timer timer;
     private int score = 0;
 
-    // Key management
     private bool hasKey = false;
 
     public void CollectKey()
@@ -33,78 +34,72 @@ public class ScoreManager : MonoBehaviour
         return hasKey;
     }
 
-    // Level complete
     public void LevelComplete()
     {
         CalculateFinalScore();
         CalculateStars();
         coinsCollectedLevelComplete.text = coins + "/16";
-        scoreLevelComplete.text = score + "";
+        scoreLevelComplete.text = score.ToString();
 
         PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].AddNewScore(score, timer.GetTime(), coins, starsValue);
         PlayerData.Instance.UnlockNextLevel();
         PlayFabManager.Instance.SavePlayer();
     }
 
-    // Update coins collected
     public void UpdateScore()
     {
         coins += 1;
         coinsCollected.text = "Coins: " + coins;
     }
 
-    // Calculate the number of stars to display based on score
     private void CalculateStars()
     {
+        // Tentukan jumlah bintang berdasarkan score
         if (score < 10000)
         {
-            stars.text = "☆☆☆";
             starsValue = 0;
         }
         else if (score <= 60000)
         {
-            stars.text = "★☆☆";
             starsValue = 1;
         }
-        else if (score > 60000 && score <= 140000)
+        else if (score <= 140000)
         {
-            stars.text = "★★☆";
             starsValue = 2;
         }
         else
         {
-            stars.text = "★★★";
             starsValue = 3;
         }
+
+        // Set tampilan sprite bintang
+        star1.sprite = (starsValue >= 1) ? starFilled : starEmpty;
+        star2.sprite = (starsValue >= 2) ? starFilled : starEmpty;
+        star3.sprite = (starsValue >= 3) ? starFilled : starEmpty;
     }
 
-    // Calculate score on level complete
     public void CalculateFinalScore()
     {
         score = coins * 10000 + (5000 - GetTime());
     }
 
-    // Get and set methods for coins
     public int Coins
     {
         get { return coins; }
         set { coins = value; }
     }
 
-    // Get and set methods for score
     public int Score
     {
         get { return score; }
         set { score = value; }
     }
 
-    // New method to get time (used for testing)
     private int GetTime()
     {
         return (timer != null) ? timer.GetTime() : customTime;
     }
 
-    // Testing method to set custom time
     public void SetCustomTime(int time)
     {
         customTime = time;
